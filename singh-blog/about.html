@@ -1,0 +1,31 @@
+{% autoescape false %}
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Singh Blog</title>
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/bootstraps.min.css" />
+	</head>
+	<body>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<a class="brand" href="/">Blog App</a>
+					<ul class="nav">
+						<label ><a href="/">Home&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/all_posts">All&nbsp;Posts&nbsp;&nbsp;&nbsp;</a></label>
+						<label class="active"><a href="/about">About&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/write_upper_model">Write&nbsp;&nbsp;&nbsp;</a></label>
+						<label align="right" ><a href="{{ url|safe }}">{{ url_linktext }}</a> </label>
+					</ul>
+			</div>
+		</div>
+		<div class="hero-unit">
+			<p>In Case of any feedback or comment </p>
+			<p>Contact Me : Gsk263@nyu.com</p>
+			<p> Phone No:  201-736-1387 </p>
+		</div>
+	</body>
+</html>
+{% endautoescape %}

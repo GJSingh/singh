@@ -1,0 +1,44 @@
+{% autoescape false %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Singh Blog</title>
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/bootstraps.min.css" />
+	</head>
+	<body>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<a class="brand" href="/">Blog App</a>
+					<ul class="nav">
+						<label ><a href="/">Home&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/Create_blog">Users&nbsp;&nbsp;&nbsp;</a></label>
+						<label class="active"><a href="/blog">Blogs&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/about">About&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/write">Write&nbsp;&nbsp;&nbsp;</a></label>
+						<label align="right" ><a href="{{ url|safe }}">{{ url_linktext }}</a> </label>
+					</ul>	
+			</div>
+		</div>
+	    <div class="hero-unit">
+			<h1><p> Welcome to my blog application </p></h1>
+		</div>
+   		<div class="posts">
+			<h2> Your latest posts</h2>
+				<hr />
+				{% for post in posts %}
+				<ul>
+					<li><h3> {{ post.title }} on {{ post.adddate.strftime("%B %d, %Y")}} </h3>
+						<p> {{ post.content }} </p> 
+						<p> {{ post.user_id }} </p>
+					</li>
+					<hr />
+				</ul>
+			{%endfor%}
+		</div>	
+
+		<a href="{{ url|safe }}">{{ url_labelnktext }}</a>
+	</body>	
+</html>
+{% endautoescape %}

@@ -1,0 +1,67 @@
+{% autoescape false %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Singh Blog</title>
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/bootstraps.min.css" />
+		<script type="text/javascript">
+			tinymce.init({
+    		selector: "textarea"
+ 			});
+		</script>
+	</head>
+	<body>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<a class="brand" href="/">Blog App</a>
+					<ul class="nav">
+						<label ><a href="/">Home&nbsp;&nbsp;&nbsp;</a></label>
+						<label class="active"><a href="/all_posts">All&nbsp;Posts&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/about">About&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/write_upper_model">Write&nbsp;&nbsp;&nbsp;</a></label>
+						<label align="right" ><a href="{{ url|safe }}">{{ url_linktext }}</a> </label>
+					</ul>	
+			</div>
+		</div>
+	    <div class="hero-unit">
+			<h1><p> Edit Post </p></h1>
+		</div>
+		111456
+   		{% for post in posts %}
+   		2222
+   			{{ post.content }} 
+				<ul>
+					<li><h3>  {{ post.title }} on {{ post.adddate}} </h3>
+							
+							<div class="container">
+					<form action="write_lower_model" enctype="multipart/form-data" method="post">
+					<label>Add New Post</label>
+					</br>
+					<label>Subject: &nbsp;&nbsp;&nbsp;</label>
+					<input type="text" name="subject" value="{{post.title}}"/> 
+					</br>
+					</br>
+					<label>Content: </label>
+					<textarea name="content"> {{ post.content }}  </textarea>
+					<br/>
+					<div><label>Tag</label></div>
+					<div><input type="text" name = "tag" ></div>
+					<div><label>Upload Pic:</label></div>
+					<div><input type="file" name="img" /></div>
+					<br />
+					<input type="hidden" id="blog_id" name="blog_id" value="{{ post.key() }}">
+					<input type="submit" value="Publish" />
+				</form>
+			</div>
+
+
+							<div><img src="/img?img_id={{ post.key() }}"></img></div>
+									
+					
+				{% endfor %}	
+				<hr />
+			</body>
+		</html>		
+{% endautoescape %}

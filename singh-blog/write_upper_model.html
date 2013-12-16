@@ -1,0 +1,52 @@
+{% autoescape false %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Singh Blog</title>
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/bootstraps.min.css" />
+	</head>
+	<body>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<a class="brand" href="/">Blog App</a>
+					<ul class="nav">
+						<label ><a href="/">Home&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/all_posts">All&nbsp;Posts&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/about">About&nbsp;&nbsp;&nbsp;</a></label>
+						<label class="active"><a href="/write_upper_model">Write&nbsp;&nbsp;&nbsp;</a></label>
+						<label align="right" ><a href="{{ url|safe }}" >{{ url_linktext }}</a> </label>
+					</ul>
+			</div>
+		</div>
+		<div class="container">
+			<form action="write_upper_model" method="post">
+				<label>Write New Blog</label>
+				</br>
+				<label>Blog-id: </label>
+				<input type="text" name="blog_id"/> 
+				<label>Blog Name: </label>
+				<input type="text" name="blog_name"/>
+				<br/>
+				<input type="submit" value="submit"/>
+			</form>
+		</div>	
+		<div class="User posts">
+			<h3> Your Previous Blogs</h3>
+				<hr />
+				{% for post in upper_post %}
+					{% if post.blog_id %}
+					<li><h3> {{ post.blog_id }} by {{ post.user_id}} </h3>
+						<p><b>Blog_Name:</b>&nbsp;&nbsp;&nbsp;{{ post.blog_name }} </p> 
+						<p> <input type="button" value="Modify Blog"  OnClick="location.href='addmodifyblog?blog_id={{post.blog_id}}'"></p>
+						<div><img src="/img?img_id={{post.key()}}"></img></div>
+					</li>
+					{% else %}
+					<h4>Write your First Blog Post<h4>
+					{% endif %}
+				{%endfor%}	
+		</div>	
+	</body>
+</html>
+{% endautoescape %}

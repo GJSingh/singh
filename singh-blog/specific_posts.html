@@ -1,0 +1,57 @@
+{% autoescape false %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Singh Blog</title>
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/bootstraps.min.css" />
+	</head>
+	<body>
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<a class="brand" href="/">Blog App</a>
+					<ul class="nav">
+						<label ><a href="/">Home&nbsp;&nbsp;&nbsp;</a></label>
+						<label class="active"><a href="/all_posts">All&nbsp;Posts&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/about">About&nbsp;&nbsp;&nbsp;</a></label>
+						<label ><a href="/write_upper_model">Write&nbsp;&nbsp;&nbsp;</a></label>
+						<label align="right" ><a href="{{ url|safe }}">{{ url_linktext }}</a> </label>
+					</ul>	
+			</div>
+		</div>
+	    <div class="hero-unit">
+			<h1><p> Welcome to my blog application </p></h1>
+		</div>
+   		<div class="posts">
+			<h2> Latest posts</h2>
+				<hr />
+				{% for post in posts %}
+				<ul>
+					<li><h3> <a href= "showpost?post_key={{ post.key() }} " > {{ post.title }} </a> on {{ post.adddate}} </h3>
+							
+								<p> {{ post.content }} </p>
+								{% if post.img_id %}
+							<div><img src="/img?img_id={{ post.key() }}"></img></div>
+								{% endif %}
+					</li>
+				</ul>		
+				{%endfor%}
+				<hr />
+				<footer>
+					<h6> Tags </h6>
+					{% for post in posts %}
+					
+					{% for tag in post.tag %}
+						<a href="searchbytag?tag={{ tag }}">{{ tag }}</a>
+						
+						{% endfor %}
+					{%endfor%}
+				</footer>
+
+
+						
+			</div>
+		</body>	
+</html>
+{% endautoescape %}

@@ -1,0 +1,73 @@
+{% autoescape true %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Singh Blog</title>
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/bootstraps.min.css" />
+		<script type="text/javascript" src="/assets/tinymce/tinymce.min.js" ></script>
+		<script type="text/javascript">
+			tinymce.init({
+    		selector: "textarea"
+ 			});
+		</script>
+	</head>
+
+		<body>	
+			<div class="navbar navbar-inverse">
+				<div class="navbar-inner">
+					<a class="brand" href="/">Blog App</a>
+						<ul class="nav">
+							<label ><a href="/">Home&nbsp;&nbsp;&nbsp;</a></label>
+							<label ><a href="/all_posts">All&nbsp;Posts&nbsp;&nbsp;&nbsp;</a></label>
+							<label ><a href="/about">About&nbsp;&nbsp;&nbsp;</a></label>
+							<label class="active"><a href="/write_upper_model">Write&nbsp;&nbsp;&nbsp;</a></label>
+							<label align="right" ><a href="{{ url|safe }}">{{ url_linktext }}</a> </label>
+						</ul>
+				</div>
+			</div>
+
+			<div class="hero-unit">
+				<h1><p> Write your Post</p></h1>
+			</div>
+	
+			<div class="container">
+				<form action="write_lower_model" enctype="multipart/form-data" method="post">
+					<label>Add New Post</label>
+					</br>
+					<label>Subject: &nbsp;&nbsp;&nbsp;</label>
+					<input type="text" name="subject"/> 
+					</br>
+					</br>
+					<label>Content: </label>
+					<textarea name="content">  </textarea>
+					<br/>
+					<div><label>Tag(Enter popular tag related to post with ',' in between like "politics,funny")</label></div>
+					<div><input type="text" name = "tag" ></div>
+					<div><label>Upload Pic:</label></div>
+					<div><input type="file" name="img" /></div>
+					<br />
+					<input type="hidden" id="blog_id" name="blog_id" value="{{ blog_id }}">
+					<input type="submit" value="Publish" />
+				</form>
+			</div>
+
+			<div class="User posts">
+			<h2> Your Previous posts</h2>
+				<hr />
+				{% for post in upper_post %}
+				<ul>
+					<li><h3> {{ post.blog_id }} by {{ post.user_id}} </h3>
+						<p> <a href="{{ post.blog_id }}"> &nbsp;&nbsp; {{ post.blog_name }} </a></p> 
+						<!--><p> {{post.tag}}<-->
+						<p> <input type="button" value="Modify Blog"  OnClick="location.href='addmodifyblog?blog_id={{post.blog_id}}'"></p>
+						
+					</li>
+				<hr />
+				</ul>
+				{%endfor%}
+		</div>	
+	</body>
+</html>
+{% endautoescape %}
